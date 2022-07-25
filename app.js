@@ -13,6 +13,7 @@ let imgTwo = document.getElementById('imgTwo');
 let imgThree = document.getElementById('imgThree');
 let showResultsBtn = document.getElementById('show-results-btn');
 let resultsList = document.getElementById('resultsList');
+let counter = document.getElementById('countNum');
 
 // ---------Constructor Function---------
 
@@ -21,7 +22,7 @@ function Product(name, photoExtension = 'jpg') {
   this.photo =`img/${name}.${photoExtension}`;
   this.views = 0;
   this.votes = 0;
-  
+
   productImgArray.push(this);
 }
 
@@ -86,6 +87,7 @@ function renderImages(){
 
 renderImages();
 
+
 // ---------Event Handlers---------
 
 function handleProductClick(event){
@@ -93,15 +95,15 @@ function handleProductClick(event){
 
   for (let i=0; i < productImgArray.length; i++){
     if(imgClicked === productImgArray[i].name){
-      productImgArray[i].votes++
+      productImgArray[i].votes++;
     }
-  }
+  } counter.innerHTML = `Remaining Rounds: ${totalVotes-1}`;
   totalVotes--;
 
   renderImages();
 
   if(totalVotes === 0){
-    imgContainer.removeEventListener('click', handleProductClick)
+    imgContainer.removeEventListener('click', handleProductClick);
   }
 }
 
@@ -117,6 +119,7 @@ function handleShowResults(){
 }
 
 // ---------Event Listeners---------
+
 
 imgContainer.addEventListener('click', handleProductClick);
 showResultsBtn.addEventListener('click', handleShowResults);
