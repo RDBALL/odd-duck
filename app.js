@@ -106,7 +106,7 @@ function handleShowResults(){
   if(totalVotes === 0){
     for(let i = 0; i < productImgArray.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}}`;
+      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
       resultsList.appendChild(liElem);
     }
     showResultsBtn.removeEventListener('click', handleShowResults);
