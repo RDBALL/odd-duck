@@ -59,26 +59,29 @@ function randomIndexGenerator(){
 randomIndexGenerator();
 
 function renderImages(){
-  let imgOneIndex = randomIndexGenerator();
-  let imgTwoIndex = randomIndexGenerator();
-  let imgThreeIndex = randomIndexGenerator();
+  let productOne = randomIndexGenerator();
+  let productTwo = randomIndexGenerator();
+  let productThree = randomIndexGenerator();
 
-  while ((imgOne.id === imgTwo.id) || (imgOne.id === imgThree.id)) {
-    imgOne = randomIndexGenerator();
+  while (productOne === productTwo) {
+    productTwo = randomIndexGenerator();
   }
-  while (imgTwo.id === imgThree.id) {
-    imgTwo = randomIndexGenerator();
+  while (productOne === productThree) {
+    productOne = randomIndexGenerator();
+  }
+  while (productTwo === productThree) {
+    productThree = randomIndexGenerator();
   }
 
-  imgOne.src = productImgArray[imgOneIndex].photo;
-  imgOne.alt = productImgArray[imgOneIndex].name;
-  productImgArray[imgOneIndex].views++;
-  imgTwo.src = productImgArray[imgTwoIndex].photo;
-  imgTwo.alt = productImgArray[imgTwoIndex].name;
-  productImgArray[imgTwoIndex].views++;
-  imgThree.src = productImgArray[imgThreeIndex].photo;
-  imgThree.alt = productImgArray[imgThreeIndex].name;
-  productImgArray[imgThreeIndex].views++;
+  imgOne.src = productImgArray[productOne].photo;
+  imgOne.alt = productImgArray[productOne].name;
+  productImgArray[productOne].views++;
+  imgTwo.src = productImgArray[productTwo].photo;
+  imgTwo.alt = productImgArray[productTwo].name;
+  productImgArray[productTwo].views++;
+  imgThree.src = productImgArray[productThree].photo;
+  imgThree.alt = productImgArray[productThree].name;
+  productImgArray[productThree].views++;
 }
 
 renderImages();

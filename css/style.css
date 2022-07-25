@@ -1,4 +1,27 @@
+body {
+  background-color: bisque;
+  width: 960px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 #imgContainer img {
-  max-width: 20rem;
-  max-height: 15rem;
+  width: 11rem;
+  height: 11rem;
+  padding: 20px;
+  background-size: 10rem;
+  background-color: aqua;
+}
+
+header {
+  display: block;
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+header img {
+  height: 150px;
 }
