@@ -13,6 +13,7 @@ let imgTwo = document.getElementById('imgTwo');
 let imgThree = document.getElementById('imgThree');
 let showResultsBtn = document.getElementById('show-results-btn');
 let resultsList = document.getElementById('resultsList');
+let counter = document.getElementById('countNum');
 
 // ---------Constructor Function---------
 
@@ -21,7 +22,7 @@ function Product(name, photoExtension = 'jpg') {
   this.photo =`img/${name}.${photoExtension}`;
   this.views = 0;
   this.votes = 0;
-  
+
   productImgArray.push(this);
 }
 
@@ -59,46 +60,56 @@ function randomIndexGenerator(){
 randomIndexGenerator();
 
 function renderImages(){
-  let imgOneIndex = randomIndexGenerator();
-  let imgTwoIndex = randomIndexGenerator();
-  let imgThreeIndex = randomIndexGenerator();
+  let productOne = randomIndexGenerator();
+  let productTwo = randomIndexGenerator();
+  let productThree = randomIndexGenerator();
 
-  while ((imgOne.id === imgTwo.id) || (imgOne.id === imgThree.id)) {
-    imgOne = randomIndexGenerator();
+  while (productOne === productTwo) {
+    productTwo = randomIndexGenerator();
   }
-  while (imgTwo.id === imgThree.id) {
-    imgTwo = randomIndexGenerator();
+  while (productOne === productThree) {
+    productOne = randomIndexGenerator();
+  }
+  while (productTwo === productThree) {
+    productThree = randomIndexGenerator();
   }
 
-  imgOne.src = productImgArray[imgOneIndex].photo;
-  imgOne.alt = productImgArray[imgOneIndex].name;
-  productImgArray[imgOneIndex].views++;
-  imgTwo.src = productImgArray[imgTwoIndex].photo;
-  imgTwo.alt = productImgArray[imgTwoIndex].name;
-  productImgArray[imgTwoIndex].views++;
-  imgThree.src = productImgArray[imgThreeIndex].photo;
-  imgThree.alt = productImgArray[imgThreeIndex].name;
-  productImgArray[imgThreeIndex].views++;
+  imgOne.src = productImgArray[productOne].photo;
+  imgOne.alt = productImgArray[productOne].name;
+  imgOne.name = productImgArray[productOne].name;
+  productImgArray[productOne].views++;
+
+  imgTwo.src = productImgArray[productTwo].photo;
+  imgTwo.alt = productImgArray[productTwo].name;
+  imgTwo.name = productImgArray[productTwo].name;
+  productImgArray[productTwo].views++;
+
+  imgThree.src = productImgArray[productThree].photo;
+  imgThree.alt = productImgArray[productThree].name;
+  imgThree.name = productImgArray[productThree].name;
+  productImgArray[productThree].views++;
 }
 
 renderImages();
+
 
 // ---------Event Handlers---------
 
 function handleProductClick(event){
   let imgClicked = event.target.name;
+  console.dir(imgClicked);
 
   for (let i=0; i < productImgArray.length; i++){
     if(imgClicked === productImgArray[i].name){
-      productImgArray[i].votes++
+      productImgArray[i].votes++;
     }
-  }
+  } counter.innerHTML = `Rounds left: ${totalVotes-1}`;
   totalVotes--;
 
   renderImages();
 
   if(totalVotes === 0){
-    imgContainer.removeEventListener('click', handleProductClick)
+    imgContainer.removeEventListener('click', handleProductClick);
   }
 }
 
@@ -106,7 +117,7 @@ function handleShowResults(){
   if(totalVotes === 0){
     for(let i = 0; i < productImgArray.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}}`;
+      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
       resultsList.appendChild(liElem);
     }
     showResultsBtn.removeEventListener('click', handleShowResults);
@@ -114,6 +125,7 @@ function handleShowResults(){
 }
 
 // ---------Event Listeners---------
+
 
 imgContainer.addEventListener('click', handleProductClick);
 showResultsBtn.addEventListener('click', handleShowResults);
