@@ -54,9 +54,8 @@ new Product('wine-glass');
 
 function randomIndexGenerator(){
   return Math.floor(Math.random() * productImgArray.length);
-  //min - 0
-  //max -array.length-1
 }
+
 randomIndexGenerator();
 
 function renderImages(){
@@ -64,9 +63,11 @@ function renderImages(){
   let imgTwoIndex = randomIndexGenerator();
   let imgThreeIndex = randomIndexGenerator();
 
-  // make sure that they are unique for each round (while loop)
-  while(imgOneIndex === imgTwoIndex){
-    imgTwoIndex = randomIndexGenerator();
+  while ((imgOne.id === imgTwo.id) || (imgOne.id === imgThree.id)) {
+    imgOne = randomIndexGenerator();
+  }
+  while (imgTwo.id === imgThree.id) {
+    imgTwo = randomIndexGenerator();
   }
 
   imgOne.src = productImgArray[imgOneIndex].photo;
@@ -85,22 +86,30 @@ renderImages();
 // ---------Event Handlers---------
 
 function handleProductClick(event){
-  let imgClicked = event.target.alt;
+  let imgClicked = event.target.name;
 
   for (let i=0; i < productImgArray.length; i++){
     if(imgClicked === productImgArray[i].name){
       productImgArray[i].votes++
     }
   }
+  totalVotes--;
 
+  renderImages();
+
+  if(totalVotes === 0){
+    imgContainer.removeEventListener('click', handleProductClick)
+  }
 }
 
 function handleShowResults(){
   if(totalVotes === 0){
     for(let i = 0; i < productImgArray.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}}`
+      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}}`;
+      resultsList.appendChild(liElem);
     }
+    showResultsBtn.removeEventListener('click', handleShowResults);
   }
 }
 
