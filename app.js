@@ -76,12 +76,17 @@ function renderImages(){
 
   imgOne.src = productImgArray[productOne].photo;
   imgOne.alt = productImgArray[productOne].name;
+  imgOne.name = productImgArray[productOne].name;
   productImgArray[productOne].views++;
+
   imgTwo.src = productImgArray[productTwo].photo;
   imgTwo.alt = productImgArray[productTwo].name;
+  imgTwo.name = productImgArray[productTwo].name;
   productImgArray[productTwo].views++;
+
   imgThree.src = productImgArray[productThree].photo;
   imgThree.alt = productImgArray[productThree].name;
+  imgThree.name = productImgArray[productThree].name;
   productImgArray[productThree].views++;
 }
 
@@ -92,12 +97,13 @@ renderImages();
 
 function handleProductClick(event){
   let imgClicked = event.target.name;
+  console.dir(imgClicked);
 
   for (let i=0; i < productImgArray.length; i++){
     if(imgClicked === productImgArray[i].name){
       productImgArray[i].votes++;
     }
-  } counter.innerHTML = `Remaining Rounds: ${totalVotes-1}`;
+  } counter.innerHTML = `Rounds left: ${totalVotes-1}`;
   totalVotes--;
 
   renderImages();
