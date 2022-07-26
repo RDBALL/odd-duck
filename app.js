@@ -12,7 +12,6 @@ let imgOne = document.getElementById('imgOne');
 let imgTwo = document.getElementById('imgTwo');
 let imgThree = document.getElementById('imgThree');
 let showResultsBtn = document.getElementById('show-results-btn');
-let resultsList = document.getElementById('resultsList');
 let counter = document.getElementById('countNum');
 
 // ---------Constructor Function---------
@@ -27,8 +26,6 @@ function Product(name, photoExtension = 'jpg') {
 }
 
 // ---------Object Creation---------
-// if there is a format other than jpg such as PNG
-// new Product('product name', 'png')
 
 new Product('bag');
 new Product('banana');
@@ -57,22 +54,20 @@ function randomIndexGenerator(){
   return Math.floor(Math.random() * productImgArray.length);
 }
 
-randomIndexGenerator();
+let productIndexArr = [];
 
 function renderImages(){
-  let productOne = randomIndexGenerator();
-  let productTwo = randomIndexGenerator();
-  let productThree = randomIndexGenerator();
 
-  while (productOne === productTwo) {
-    productTwo = randomIndexGenerator();
+  while (productIndexArr.length < 6){
+    let randomNumber = randomIndexGenerator();
+    if (!productIndexArr.includes(randomNumber)){
+      productIndexArr.push(randomNumber);
+    }
   }
-  while (productOne === productThree) {
-    productOne = randomIndexGenerator();
-  }
-  while (productTwo === productThree) {
-    productThree = randomIndexGenerator();
-  }
+
+  let productOne = productIndexArr.shift();
+  let productTwo = productIndexArr.shift();
+  let productThree = productIndexArr.shift();
 
   imgOne.src = productImgArray[productOne].photo;
   imgOne.alt = productImgArray[productOne].name;
@@ -88,10 +83,8 @@ function renderImages(){
   imgThree.alt = productImgArray[productThree].name;
   imgThree.name = productImgArray[productThree].name;
   productImgArray[productThree].views++;
+
 }
-
-renderImages();
-
 
 // ---------Event Handlers---------
 
@@ -113,19 +106,97 @@ function handleProductClick(event){
   }
 }
 
+
+
+//---------Refactored to render chart---------
+
 function handleShowResults(){
   if(totalVotes === 0){
-    for(let i = 0; i < productImgArray.length; i++){
-      let liElem = document.createElement('li');
-      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
-      resultsList.appendChild(liElem);
-    }
     showResultsBtn.removeEventListener('click', handleShowResults);
+    renderChart();
   }
 }
 
-// ---------Event Listeners---------
+//---------Filling Chart with Data---------
 
+let canvasElem = document.getElementById('myChart');
+
+function renderChart(){
+
+  let productName = [];
+  let productVotes = [];
+  let productViews = [];
+
+  for(let i = 0; i <productImgArray.length; i++){
+    productName.push(productImgArray[i].name);
+    productVotes.push(productImgArray[i].votes);
+    productViews.push(productImgArray[i].views);
+  }
+
+  let myChart =  {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: '# of Votes',
+        data: productVotes,
+        backgroundColor: [
+          'rgba(40, 244, 74, 1)',
+          // 'rgba(54, 162, 235, 0.2)',
+          // 'rgba(255, 206, 86, 0.2)',
+          // 'rgba(75, 192, 192, 0.2)',
+          // 'rgba(153, 102, 255, 0.2)',
+          // 'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(28, 37, 29, 1)',
+          // 'rgba(54, 162, 235, 1)',
+          // 'rgba(255, 206, 86, 1)',
+          // 'rgba(75, 192, 192, 1)',
+          // 'rgba(153, 102, 255, 1)',
+          // 'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      },
+      {
+        label: '# of views',
+        data: productViews,
+        backgroundColor: [
+          'rgba(23, 167, 224, .6)',
+          // 'rgba(54, 162, 235, 0.2)',
+          // 'rgba(255, 206, 86, 0.2)',
+          // 'rgba(75, 192, 192, 0.2)',
+          // 'rgba(153, 102, 255, 0.2)',
+          // 'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(0, 21, 86, 1)',
+          // 'rgba(54, 162, 235, 1)',
+          // 'rgba(255, 206, 86, 1)',
+          // 'rgba(75, 192, 192, 1)',
+          // 'rgba(153, 102, 255, 1)',
+          // 'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  new Chart(canvasElem, myChart);
+}
+
+randomIndexGenerator();
+renderImages();
+
+// ---------Event Listeners---------
 
 imgContainer.addEventListener('click', handleProductClick);
 showResultsBtn.addEventListener('click', handleShowResults);
