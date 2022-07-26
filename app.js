@@ -12,7 +12,6 @@ let imgOne = document.getElementById('imgOne');
 let imgTwo = document.getElementById('imgTwo');
 let imgThree = document.getElementById('imgThree');
 let showResultsBtn = document.getElementById('show-results-btn');
-let resultsList = document.getElementById('resultsList');
 let counter = document.getElementById('countNum');
 
 // ---------Constructor Function---------
@@ -27,8 +26,6 @@ function Product(name, photoExtension = 'jpg') {
 }
 
 // ---------Object Creation---------
-// if there is a format other than jpg such as PNG
-// new Product('product name', 'png')
 
 new Product('bag');
 new Product('banana');
@@ -111,21 +108,16 @@ function handleProductClick(event){
 
 
 
-// Refactor into chart
+//---------Refactored to render chart---------
 
 function handleShowResults(){
   if(totalVotes === 0){
-    // for(let i = 0; i < productImgArray.length; i++){
-    //   let liElem = document.createElement('li');
-    //   liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
-    //   resultsList.appendChild(liElem);
-    // }
     showResultsBtn.removeEventListener('click', handleShowResults);
     renderChart();
   }
 }
 
-//chart demo
+//---------Filling Chart with Data---------
 
 let canvasElem = document.getElementById('myChart');
 
@@ -201,20 +193,6 @@ function renderChart(){
 
   new Chart(canvasElem, myChart);
 }
-
-
-// function handleShowResults(){
-//   if(totalVotes === 0){
-//     for(let i = 0; i < productImgArray.length; i++){
-//       let liElem = document.createElement('li');
-//       liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
-//       resultsList.appendChild(liElem);
-//     }
-//     showResultsBtn.removeEventListener('click', handleShowResults);
-//   }
-// }
-
-
 
 randomIndexGenerator();
 renderImages();
