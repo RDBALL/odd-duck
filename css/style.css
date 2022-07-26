@@ -121,7 +121,7 @@ h3 {
   align-self: auto;
   order: 0;
   padding: 10px;
-  margin: 2rem;
+  margin-bottom: 2rem;
   border-radius: 5px;
   color: azure;
   font-size: 1.5rem;
@@ -147,4 +147,15 @@ canvas {
   max-height: 350px;
   max-width: 960px;
   font-size: 1.5rem;
+}
+
+footer a {
+  font-family: 'roboto';
+  padding: .25rem;
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  text-decoration: none !important;
+  margin-top: 1rem;
+  background-color: gray;;
 }
