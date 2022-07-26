@@ -57,22 +57,32 @@ function randomIndexGenerator(){
   return Math.floor(Math.random() * productImgArray.length);
 }
 
-randomIndexGenerator();
-
 function renderImages(){
-  let productOne = randomIndexGenerator();
-  let productTwo = randomIndexGenerator();
-  let productThree = randomIndexGenerator();
 
-  while (productOne === productTwo) {
-    productTwo = randomIndexGenerator();
+  ///////////
+  // In class demo to help solve lab 12
+
+  let productIndexArr = [];
+  let currentImgGroup = [];
+  let previousImgGroup = [];
+
+  for (let i = 0; i < 3; i++) {
+    let index = randomIndexGenerator();
+    while (previousImgGroup.includes(index) || (currentImgGroup.includes(index)));
+    index = randomIndexGenerator();
   }
-  while (productOne === productThree) {
-    productOne = randomIndexGenerator();
+  currentImgGroup.push(productImgArray);
+
+  while (productIndexArr.length < 3){
+    let randomNumber = randomIndexGenerator();
+    if (!productIndexArr.includes(randomNumber)){
+      productIndexArr.push(randomNumber);
+    }
   }
-  while (productTwo === productThree) {
-    productThree = randomIndexGenerator();
-  }
+
+  let productOne = productIndexArr.pop();
+  let productTwo = productIndexArr.pop();
+  let productThree = productIndexArr.pop();
 
   imgOne.src = productImgArray[productOne].photo;
   imgOne.alt = productImgArray[productOne].name;
@@ -89,9 +99,6 @@ function renderImages(){
   imgThree.name = productImgArray[productThree].name;
   productImgArray[productThree].views++;
 }
-
-renderImages();
-
 
 // ---------Event Handlers---------
 
@@ -124,8 +131,12 @@ function handleShowResults(){
   }
 }
 
-// ---------Event Listeners---------
 
+
+randomIndexGenerator();
+renderImages();
+
+// ---------Event Listeners---------
 
 imgContainer.addEventListener('click', handleProductClick);
 showResultsBtn.addEventListener('click', handleShowResults);
