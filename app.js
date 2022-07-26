@@ -132,7 +132,6 @@ function renderChart(){
     productVotes.push(productImgArray[i].votes);
     productViews.push(productImgArray[i].views);
   }
-  const ctx = document.getElementById('myChart').getContext('2d');
 
   let myChart =  {
     type: 'bar',
@@ -142,20 +141,20 @@ function renderChart(){
         label: '# of Votes',
         data: productVotes,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(40, 244, 74, 1)',
+          // 'rgba(54, 162, 235, 0.2)',
+          // 'rgba(255, 206, 86, 0.2)',
+          // 'rgba(75, 192, 192, 0.2)',
+          // 'rgba(153, 102, 255, 0.2)',
+          // 'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(28, 37, 29, 1)',
+          // 'rgba(54, 162, 235, 1)',
+          // 'rgba(255, 206, 86, 1)',
+          // 'rgba(75, 192, 192, 1)',
+          // 'rgba(153, 102, 255, 1)',
+          // 'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
       },
@@ -163,20 +162,20 @@ function renderChart(){
         label: '# of views',
         data: productViews,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(23, 167, 224, .6)',
+          // 'rgba(54, 162, 235, 0.2)',
+          // 'rgba(255, 206, 86, 0.2)',
+          // 'rgba(75, 192, 192, 0.2)',
+          // 'rgba(153, 102, 255, 0.2)',
+          // 'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(0, 21, 86, 1)',
+          // 'rgba(54, 162, 235, 1)',
+          // 'rgba(255, 206, 86, 1)',
+          // 'rgba(75, 192, 192, 1)',
+          // 'rgba(153, 102, 255, 1)',
+          // 'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
       }
