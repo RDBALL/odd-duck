@@ -87,6 +87,8 @@ function renderImages(){
   imgThree.name = productImgArray[productThree].name;
   productImgArray[productThree].views++;
 
+}
+
 // ---------Event Handlers---------
 
 function handleProductClick(event){
