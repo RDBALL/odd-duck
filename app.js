@@ -57,32 +57,20 @@ function randomIndexGenerator(){
   return Math.floor(Math.random() * productImgArray.length);
 }
 
+let productIndexArr = [];
+
 function renderImages(){
 
-  ///////////
-  // In class demo to help solve lab 12
-
-  let productIndexArr = [];
-  let currentImgGroup = [];
-  let previousImgGroup = [];
-
-  for (let i = 0; i < 3; i++) {
-    let index = randomIndexGenerator();
-    while (previousImgGroup.includes(index) || (currentImgGroup.includes(index)));
-    index = randomIndexGenerator();
-  }
-  currentImgGroup.push(productImgArray);
-
-  while (productIndexArr.length < 3){
+  while (productIndexArr.length < 6){
     let randomNumber = randomIndexGenerator();
     if (!productIndexArr.includes(randomNumber)){
       productIndexArr.push(randomNumber);
     }
   }
 
-  let productOne = productIndexArr.pop();
-  let productTwo = productIndexArr.pop();
-  let productThree = productIndexArr.pop();
+  let productOne = productIndexArr.shift();
+  let productTwo = productIndexArr.shift();
+  let productThree = productIndexArr.shift();
 
   imgOne.src = productImgArray[productOne].photo;
   imgOne.alt = productImgArray[productOne].name;
@@ -98,7 +86,6 @@ function renderImages(){
   imgThree.alt = productImgArray[productThree].name;
   imgThree.name = productImgArray[productThree].name;
   productImgArray[productThree].views++;
-}
 
 // ---------Event Handlers---------
 
@@ -120,16 +107,81 @@ function handleProductClick(event){
   }
 }
 
+
+
+// Refactor into chart
+
 function handleShowResults(){
   if(totalVotes === 0){
-    for(let i = 0; i < productImgArray.length; i++){
-      let liElem = document.createElement('li');
-      liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
-      resultsList.appendChild(liElem);
-    }
+    renderChart();
+    // for(let i = 0; i < productImgArray.length; i++){
+    //   let liElem = document.createElement('li');
+    //   liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
+    //   resultsList.appendChild(liElem);
+    // }
     showResultsBtn.removeEventListener('click', handleShowResults);
   }
 }
+
+//chart demo
+
+let canvasElem = document.getElementById('myChart');
+
+function renderChart(){
+
+  let productNames = [];
+  let productVotes = [];
+  let productViews = [];
+
+  let myObj = {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Votes',
+        data: productVotes,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  new CharacterData(canvasElem, myObj);
+}
+
+
+// function handleShowResults(){
+//   if(totalVotes === 0){
+//     for(let i = 0; i < productImgArray.length; i++){
+//       let liElem = document.createElement('li');
+//       liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
+//       resultsList.appendChild(liElem);
+//     }
+//     showResultsBtn.removeEventListener('click', handleShowResults);
+//   }
+// }
 
 
 
