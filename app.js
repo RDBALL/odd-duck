@@ -115,13 +115,13 @@ function handleProductClick(event){
 
 function handleShowResults(){
   if(totalVotes === 0){
-    renderChart();
     // for(let i = 0; i < productImgArray.length; i++){
     //   let liElem = document.createElement('li');
     //   liElem.textContent = `${productImgArray[i].name}: views: ${productImgArray[i].views}, votes: ${productImgArray[i].votes}`;
     //   resultsList.appendChild(liElem);
     // }
     showResultsBtn.removeEventListener('click', handleShowResults);
+    renderChart();
   }
 }
 
@@ -131,14 +131,21 @@ let canvasElem = document.getElementById('myChart');
 
 function renderChart(){
 
-  let productNames = [];
+  let productName = [];
   let productVotes = [];
   let productViews = [];
 
-  let myObj = {
+  for(let i = 0; i <productImgArray.length; i++){
+    productName.push(productImgArray[i].name);
+    productVotes.push(productImgArray[i].votes);
+    productViews.push(productImgArray[i].views);
+  }
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  let myChart =  {
     type: 'bar',
     data: {
-      labels: productNames,
+      labels: productName,
       datasets: [{
         label: '# of Votes',
         data: productVotes,
@@ -159,7 +166,29 @@ function renderChart(){
           'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
-      }]
+      },
+      {
+        label: '# of views',
+        data: productViews,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }
+      ]
     },
     options: {
       scales: {
@@ -170,7 +199,7 @@ function renderChart(){
     }
   };
 
-  new CharacterData(canvasElem, myObj);
+  new Chart(canvasElem, myChart);
 }
 
 
