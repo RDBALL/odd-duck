@@ -25,11 +25,11 @@ function Product(name, photoExtension = 'jpg') {
   productImgArray.push(this);
 }
 
-// retrieve data from local storage 
+// ---------retrieve data from local storage---------     ***STEP THREE***
 
 let retrievedProducts = localStorage.getItem('oddDuckProducts');
 
-// parse data "un-stringify"
+// ---------parse data "un-stringify"---------            ***STEP FOUR***
 
 let parsedProducts = JSON.parse(retrievedProducts);
 
@@ -37,7 +37,7 @@ if(retrievedProducts){
   productImgArray = parsedProducts;
 } else {
 
-// ---------Object Creation---------
+  // ---------Object Creation---------
 
   new Product('bag');
   new Product('banana');
@@ -126,10 +126,10 @@ function handleShowResults(){
   if(totalVotes === 0){
     showResultsBtn.removeEventListener('click', handleShowResults);
     renderChart();
-    // stringify data from in-class demo
+    // ---------stringify data from in-class demo---------  ***STEP ONE***
     let stringifiedProducts = JSON.stringify(productImgArray);
 
-    // adding string to local storage
+    // ---------adding string to local storage---------     ***STEP TWO***
     localStorage.setItem('oddDuckProducts', stringifiedProducts);
   }
 }
@@ -207,7 +207,7 @@ function renderChart(){
     }
   };
 
-  new Chart(canvasElem, myChart);
+  new Chart(canvasElem, myChart); // eslint-disable-line
 }
 
 randomIndexGenerator();
