@@ -25,28 +25,40 @@ function Product(name, photoExtension = 'jpg') {
   productImgArray.push(this);
 }
 
+// retrieve data from local storage 
+
+let retrievedProducts = localStorage.getItem('oddDuckProducts');
+
+// parse data "un-stringify"
+
+let parsedProducts = JSON.parse(retrievedProducts);
+
+if(retrievedProducts){
+  productImgArray = parsedProducts;
+} else {
+
 // ---------Object Creation---------
 
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep', 'png');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('water-can');
-new Product('wine-glass');
-
+  new Product('bag');
+  new Product('banana');
+  new Product('bathroom');
+  new Product('boots');
+  new Product('breakfast');
+  new Product('bubblegum');
+  new Product('chair');
+  new Product('cthulhu');
+  new Product('dog-duck');
+  new Product('dragon');
+  new Product('pen');
+  new Product('pet-sweep');
+  new Product('scissors');
+  new Product('shark');
+  new Product('sweep', 'png');
+  new Product('tauntaun');
+  new Product('unicorn');
+  new Product('water-can');
+  new Product('wine-glass');
+}
 
 // ---------Helper Functions---------
 
@@ -114,6 +126,11 @@ function handleShowResults(){
   if(totalVotes === 0){
     showResultsBtn.removeEventListener('click', handleShowResults);
     renderChart();
+    // stringify data from in-class demo
+    let stringifiedProducts = JSON.stringify(productImgArray);
+
+    // adding string to local storage
+    localStorage.setItem('oddDuckProducts', stringifiedProducts);
   }
 }
 
