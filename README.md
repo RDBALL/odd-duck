@@ -1,32 +1,9 @@
-# odd-duck
+# Odd Duck Product Co
 
-Getting the project requirements identified
+### This is an application to help Odd Duck Product Co determine what their next product should be
 
-### DOM refs
-  -Grab html elements tha tshow the pictures of products - imgs
-    -DOM manipulation to have JS render the goats
-  -Render list of results
-
-### Product Objects
-  - Properties
-    -Votes
-    -Views
-    -name
-    -img of the products - path
-  Array to store our products
-
-### Global Variables
-
-  -Total votes - 25
-
-### Executable Code
-
-  - Random img generator
-    -selects 3 unique images
-  - Event listeners!
-      - click - on the img
-        - rerender new images
-        - increase the views on the goats that are rendered
-        - count the vote
-      - click - "button" after 25 rounds show results
-      
+* When a user visits the site they will be prompted to choose one of three random images
+* When a user selects an image, all three images are replaced with three more randomly selected images
+* To ensure that there is limited recurrence bias, there will never be a sequence of images that are shown consecutively
+* When the user has voted 25 times total they will be able to view a chart that displays how many times each item was seen and/or voted for
+* There is persistent memory so that the user can refresh the page and continue to gather compounding selection data

@@ -13,13 +13,11 @@ header img {
   height: 150px;
 }
 
-/* https://stackoverflow.com/questions/39725592/loop-div-background-color-through-all-rainbow-colors-gradually-css */
-
 h1 {
   font-family: 'Roboto', sans-serif;
   font-size: 2.5rem;
   background-color: #FF0000;
-  animation: bgColor 15s infinite linear;
+  animation: bgColor 10s infinite linear;
   background-size: auto;
   display: block;
   text-align: center;
